@@ -16,6 +16,11 @@ assert 1 <= len(LINE) <= 140, f"line is {len(LINE)} chars, must be 1-140"
 assert LINE.strip(), "line must not be only whitespace"
 assert "\n" not in LINE, "line must be a single line"
 assert LINE.count(".") == 1 and LINE.endswith("."), "line must be a single sentence"
+# The gate counts characters, not bytes: every character must be a real
+# printable character (no control characters, no hidden formatting), and
+# the line must not start or end with whitespace the judge would see.
+assert all(c.isprintable() for c in LINE), "line must hold printable characters only"
+assert LINE == LINE.strip(), "line must not start or end with whitespace"
 
 
 def main() -> None:
